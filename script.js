@@ -31,6 +31,15 @@ document.addEventListener("DOMContentLoaded", () => {
         const audio = new Audio("sounds/" + sound.file);
         audio.volume = volume;
 
+        // 🔹 Remettre le bouton en play quand le son se termine
+        audio.addEventListener("ended", () => {
+          btn.textContent = "▶";
+          if (currentAudio === audio) {
+            currentAudio = null;
+            currentButton = null;
+          }
+        });
+
         btn.onclick = () => {
           if (currentAudio && currentAudio !== audio) {
             currentAudio.pause();
