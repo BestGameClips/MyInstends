@@ -1,75 +1,62 @@
-let globalVolume = 1;
-const audios = {};
-let currentPlaying = null;
+const container = document.getElementById("sounds");
+const search = document.getElementById("search");
 
-function randomColor() {
-    return `hsl(${Math.random() * 360}, 70%, 55%)`;
-}
+let currentAudio = null;
+let currentButton = null;
 
-// Charger config.json
-fetch("./config.json")
-    .then(res => res.json())
-    .then(config => {
-        globalVolume = config.volume;
-        document.getElementById("volume").value = globalVolume;
+fetch("config.json")
+  .then(res => res.json())
+  .then(config => {
+    const volume = config.volume ?? 1;
 
-        config.sounds.forEach(sound => createSound(sound));
-    });
+    config.sounds.forEach(sound => {
+      const wrap = document.createElement("div");
+      wrap.className = "sound";
+      wrap.dataset.name = sound.name.toLowerCase();
 
-function createSound(sound) {
-    const div = document.createElement("div");
-    div.className = "sound";
-    div.dataset.name = sound.name.toLowerCase();
+      const btn = document.createElement("button");
+      btn.textContent = "▶";
+      btn.style.background = `hsl(${Math.random() * 360},70%,50%)`;
 
-    const btn = document.createElement("button");
-    btn.textContent = "▶";
-    btn.style.background = randomColor();
+      const label = document.createElement("span");
+      label.textContent = sound.name;
 
-    const label = document.createElement("span");
-    label.textContent = sound.name;
+      const audio = new Audio("sounds/" + sound.file);
+      audio.volume = volume;
 
-    const audio = new Audio(sound.file);
-    audio.preload = "auto";
-    audio.volume = globalVolume;
-
-    audios[sound.file] = audio;
-
-    btn.onclick = () => {
-        if (currentPlaying === audio) {
-            audio.pause();
-            audio.currentTime = 0;
-            currentPlaying = null;
-            btn.textContent = "▶";
-            return;
+      btn.onclick = () => {
+        if (currentAudio && currentAudio !== audio) {
+          currentAudio.pause();
+          currentAudio.currentTime = 0;
+          currentButton.textContent = "▶";
         }
 
-        if (currentPlaying) {
-            currentPlaying.pause();
-            currentPlaying.currentTime = 0;
-            document.querySelectorAll(".sound button").forEach(b => b.textContent = "▶");
+        if (audio.paused) {
+          audio.play();
+          btn.textContent = "⏹";
+          currentAudio = audio;
+          currentButton = btn;
+        } else {
+          audio.pause();
+          audio.currentTime = 0;
+          btn.textContent = "▶";
+          currentAudio = null;
         }
+      };
 
-        audio.currentTime = 0;
-        audio.play();
-        btn.textContent = "⏹";
-        currentPlaying = audio;
-    };
-
-    div.appendChild(btn);
-    div.appendChild(label);
-    document.getElementById("soundboard").appendChild(div);
-}
-
-// Volume global
-document.getElementById("volume").oninput = e => {
-    globalVolume = e.target.value;
-    Object.values(audios).forEach(a => a.volume = globalVolume);
-};
-
-// Recherche
-document.getElementById("search").onkeyup = e => {
-    const q = e.target.value.toLowerCase();
-    document.querySelectorAll(".sound").forEach(s => {
-        s.style.display = s.dataset.name.includes(q) ? "flex" : "none";
+      wrap.appendChild(btn);
+      wrap.appendChild(label);
+      container.appendChild(wrap);
     });
-};
+  })
+  .catch(err => {
+    container.innerHTML = "❌ Impossible de charger config.json";
+    console.error(err);
+  });
+
+search.addEventListener("input", e => {
+  const v = e.target.value.toLowerCase();
+  document.querySelectorAll(".sound").forEach(s =>
+    s.style.display = s.dataset.name.includes(v) ? "" : "none"
+  );
+});
