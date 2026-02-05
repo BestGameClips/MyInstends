@@ -1,62 +1,74 @@
-const container = document.getElementById("sounds");
-const search = document.getElementById("search");
+document.addEventListener("DOMContentLoaded", () => {
 
-let currentAudio = null;
-let currentButton = null;
+  const container = document.getElementById("sounds");
+  const search = document.getElementById("search");
 
-fetch("config.json")
-  .then(res => res.json())
-  .then(config => {
-    const volume = config.volume ?? 1;
+  if (!container) {
+    console.error("❌ #sounds introuvable");
+    return;
+  }
 
-    config.sounds.forEach(sound => {
-      const wrap = document.createElement("div");
-      wrap.className = "sound";
-      wrap.dataset.name = sound.name.toLowerCase();
+  let currentAudio = null;
+  let currentButton = null;
 
-      const btn = document.createElement("button");
-      btn.textContent = "▶";
-      btn.style.background = `hsl(${Math.random() * 360},70%,50%)`;
+  fetch("config.json")
+    .then(res => res.json())
+    .then(config => {
 
-      const label = document.createElement("span");
-      label.textContent = sound.name;
+      const volume = config.volume ?? 1;
 
-      const audio = new Audio("sounds/" + sound.file);
-      audio.volume = volume;
+      config.sounds.forEach(sound => {
+        const wrap = document.createElement("div");
+        wrap.className = "sound";
+        wrap.dataset.name = sound.name.toLowerCase();
 
-      btn.onclick = () => {
-        if (currentAudio && currentAudio !== audio) {
-          currentAudio.pause();
-          currentAudio.currentTime = 0;
-          currentButton.textContent = "▶";
-        }
+        const btn = document.createElement("button");
+        btn.textContent = "▶";
+        btn.style.background = `hsl(${Math.random() * 360},70%,50%)`;
 
-        if (audio.paused) {
-          audio.play();
-          btn.textContent = "⏹";
-          currentAudio = audio;
-          currentButton = btn;
-        } else {
-          audio.pause();
-          audio.currentTime = 0;
-          btn.textContent = "▶";
-          currentAudio = null;
-        }
-      };
+        const label = document.createElement("span");
+        label.textContent = sound.name;
 
-      wrap.appendChild(btn);
-      wrap.appendChild(label);
-      container.appendChild(wrap);
+        const audio = new Audio("sounds/" + sound.file);
+        audio.volume = volume;
+
+        btn.onclick = () => {
+          if (currentAudio && currentAudio !== audio) {
+            currentAudio.pause();
+            currentAudio.currentTime = 0;
+            currentButton.textContent = "▶";
+          }
+
+          if (audio.paused) {
+            audio.play();
+            btn.textContent = "⏹";
+            currentAudio = audio;
+            currentButton = btn;
+          } else {
+            audio.pause();
+            audio.currentTime = 0;
+            btn.textContent = "▶";
+            currentAudio = null;
+          }
+        };
+
+        wrap.appendChild(btn);
+        wrap.appendChild(label);
+        container.appendChild(wrap);
+      });
+    })
+    .catch(err => {
+      container.innerHTML = "❌ Erreur chargement config.json";
+      console.error(err);
     });
-  })
-  .catch(err => {
-    container.innerHTML = "❌ Impossible de charger config.json";
-    console.error(err);
-  });
 
-search.addEventListener("input", e => {
-  const v = e.target.value.toLowerCase();
-  document.querySelectorAll(".sound").forEach(s =>
-    s.style.display = s.dataset.name.includes(v) ? "" : "none"
-  );
+  if (search) {
+    search.oninput = e => {
+      const v = e.target.value.toLowerCase();
+      document.querySelectorAll(".sound").forEach(s =>
+        s.style.display = s.dataset.name.includes(v) ? "" : "none"
+      );
+    };
+  }
+
 });
