@@ -2,7 +2,6 @@ let globalVolume = 1;
 const audios = {};
 let currentPlaying = null;
 
-// Couleur aléatoire
 function randomColor() {
     return `hsl(${Math.random() * 360}, 70%, 55%)`;
 }
@@ -17,7 +16,6 @@ fetch("./config.json")
         config.sounds.forEach(sound => createSound(sound));
     });
 
-// Créer un bouton son
 function createSound(sound) {
     const div = document.createElement("div");
     div.className = "sound";
@@ -37,7 +35,6 @@ function createSound(sound) {
     audios[sound.file] = audio;
 
     btn.onclick = () => {
-        // stop si déjà en cours
         if (currentPlaying === audio) {
             audio.pause();
             audio.currentTime = 0;
@@ -46,7 +43,6 @@ function createSound(sound) {
             return;
         }
 
-        // stop l'ancien
         if (currentPlaying) {
             currentPlaying.pause();
             currentPlaying.currentTime = 0;
