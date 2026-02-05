@@ -1,0 +1,13 @@
+{
+  "volume": 0.8,
+  "sounds": [
+    {
+      "name": "Tonton H",
+      "file": "sounds/tonton t.mp3"
+    },
+    {
+      "name": "Bruh",
+      "file": "sounds/Bruh.mp3"
+    }
+  ]
+}
