@@ -1,17 +1,8 @@
 {
   "volume": 0.8,
   "sounds": [
-    {
-      "name": "Tonton H",
-      "file": "Tonton_H.mp3"
-    },
-    {
-      "name": "Sahue Song",
-      "file": "Sahue_Song.mp3"
-    },
-    {
-      "name": "BRUIT DE VAN",
-      "file": "BRUIT_DE_VAN.mp3"
-    }
+    { "name": "Tonton H", "file": "Tonton_H.mp3" },
+    { "name": "Sahue Song", "file": "Sahue_Song.mp3" },
+    { "name": "BRUIT DE VAN", "file": "BRUIT_DE_VAN.mp3" }
   ]
 }
