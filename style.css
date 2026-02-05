@@ -1,59 +1,50 @@
 body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #111;
-    color: white;
-    text-align: center;
+  margin: 0;
+  background: #0f0f0f;
+  color: white;
+  font-family: Arial, sans-serif;
+  text-align: center;
 }
 
 h1 {
-    margin: 20px 0;
+  margin: 15px 0;
 }
 
 #search {
-    width: 90%;
-    max-width: 400px;
-    padding: 12px;
-    border-radius: 10px;
-    border: none;
-    margin-bottom: 10px;
+  width: 90%;
+  max-width: 400px;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: none;
+  margin-bottom: 15px;
 }
 
-.volume {
-    margin-bottom: 20px;
-}
-
-.soundboard {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-    gap: 15px;
-    padding: 20px;
-    max-width: 1000px;
-    margin: auto;
+#sounds {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+  gap: 15px;
+  padding: 15px;
 }
 
 .sound {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .sound button {
-    width: 95px;
-    height: 95px;
-    border: none;
-    border-radius: 16px;
-    font-size: 32px;
-    color: white;
-    cursor: pointer;
-    transition: transform 0.1s;
-}
-
-.sound button:active {
-    transform: scale(0.95);
+  width: 70px;
+  height: 70px;
+  border-radius: 15px;
+  border: none;
+  font-size: 26px;
+  color: white;
+  cursor: pointer;
 }
 
 .sound span {
-    margin-top: 6px;
-    font-size: 14px;
+  margin-top: 6px;
+  font-size: 13px;
+  word-break: break-word;
 }
