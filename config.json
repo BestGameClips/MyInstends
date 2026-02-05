@@ -3,18 +3,15 @@
   "sounds": [
     {
       "name": "Tonton H",
-      "file": "sounds/Tonton_H.mp3"
+      "file": "Tonton_H.mp3"
     },
     {
       "name": "Sahue Song",
-      "file": "sounds/Sahue_Song.mp3"
+      "file": "Sahue_Song.mp3"
     },
     {
       "name": "BRUIT DE VAN",
-      "file": "sounds/BRUIT_DE_VAN.mp3"
+      "file": "BRUIT_DE_VAN.mp3"
     }
   ]
 }
-
-
-
