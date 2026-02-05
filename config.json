@@ -3,7 +3,7 @@
   "sounds": [
     {
       "name": "Tonton H",
-      "file": "sounds/Tonton H.mp3"
+      "file": "sounds/tonton h.mp3"
     },
     {
       "name": "Bruh",
@@ -11,3 +11,4 @@
     }
   ]
 }
+
