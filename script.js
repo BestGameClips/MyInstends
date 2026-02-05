@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const container = document.getElementById("sounds");
 
   if (!container) {
-    console.error("❌ #sounds introuvable dans index.html");
+    console.error("❌ #sounds introuvable");
     return;
   }
 
@@ -32,6 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
         audio.volume = volume;
 
         btn.onclick = () => {
+
           if (currentAudio && currentAudio !== audio) {
             currentAudio.pause();
             currentAudio.currentTime = 0;
