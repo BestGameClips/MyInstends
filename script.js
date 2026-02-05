@@ -1,10 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
 
   const container = document.getElementById("sounds");
-  const search = document.getElementById("search");
 
   if (!container) {
-    console.error("❌ #sounds introuvable");
+    console.error("❌ #sounds introuvable dans index.html");
     return;
   }
 
@@ -18,9 +17,9 @@ document.addEventListener("DOMContentLoaded", () => {
       const volume = config.volume ?? 1;
 
       config.sounds.forEach(sound => {
+
         const wrap = document.createElement("div");
         wrap.className = "sound";
-        wrap.dataset.name = sound.name.toLowerCase();
 
         const btn = document.createElement("button");
         btn.textContent = "▶";
@@ -56,19 +55,11 @@ document.addEventListener("DOMContentLoaded", () => {
         wrap.appendChild(label);
         container.appendChild(wrap);
       });
+
     })
     .catch(err => {
       container.innerHTML = "❌ Erreur chargement config.json";
       console.error(err);
     });
-
-  if (search) {
-    search.oninput = e => {
-      const v = e.target.value.toLowerCase();
-      document.querySelectorAll(".sound").forEach(s =>
-        s.style.display = s.dataset.name.includes(v) ? "" : "none"
-      );
-    };
-  }
 
 });
