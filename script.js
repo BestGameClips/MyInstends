@@ -7,8 +7,8 @@ function randomColor() {
     return `hsl(${Math.random() * 360}, 70%, 55%)`;
 }
 
-// Charger config
-fetch("config.json")
+// Charger config.json
+fetch("./config.json")
     .then(res => res.json())
     .then(config => {
         globalVolume = config.volume;
