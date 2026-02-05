@@ -32,7 +32,6 @@ document.addEventListener("DOMContentLoaded", () => {
         audio.volume = volume;
 
         btn.onclick = () => {
-
           if (currentAudio && currentAudio !== audio) {
             currentAudio.pause();
             currentAudio.currentTime = 0;
