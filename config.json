@@ -8,8 +8,13 @@
     {
       "name": "Sahue Song",
       "file": "sounds/Sahue_Song.mp3"
+    },
+    {
+      "name": "BRUIT DE VAN",
+      "file": "sounds/BRUIT_DE_VAN.mp3"
     }
   ]
 }
+
 
 
